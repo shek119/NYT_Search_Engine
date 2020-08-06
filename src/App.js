@@ -9,7 +9,7 @@ import SearchPage from "./pages/search";
 import SignInPage from "./pages/sign_in";
 import SignUpPage from "./pages/sign_up";
 
-function ProtectedRoute({ path, children }) {
+function ProtectRoute({ path, children }) {
   const isAuth = localStorage.getItem("jwt_auth");
 
   return (
