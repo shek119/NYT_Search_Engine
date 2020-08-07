@@ -44,12 +44,7 @@ export const StyledSearchbar = styled(SearchBar)`
 `;
 
 export const PageHeaderGrid = styled.div`
-  display: grid;
-  margin: 20px;
+  display: flex;
+  margin: 10px 25px;
   justify-content: space-between;
-`;
-
-export const StyledHr = styled.hr`
-  border: none;
-  border-bottom: 1px solid #ebebeb;
 `;

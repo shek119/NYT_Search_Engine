@@ -3,16 +3,16 @@ import faker from "faker";
 import {
   SearchHeaderGrid,
   StyledH1,
-  StyledHr,
   Avatar,
   PageHeaderGrid,
   StyledSearchbar
 } from "./style";
+import { StyledHr } from "../common/Hr";
 import { useHistory } from "react-router-dom";
 
 export const SearchHeader = ({ isAuth }) => {
   const history = useHistory();
-  const avatarImg = isAuth ? faker.image.avatar() : "user-silhouette.svg";
+  const avatarImg = isAuth ? faker.image.avatar() : "/user-silhouette.svg";
 
   const onAvatarClick = (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ export const SearchHeader = ({ isAuth }) => {
 
 export const PageHeader = ({ header, isAuth }) => {
   const history = useHistory();
-  const avatarImg = isAuth ? faker.image.avatar() : "user-silhouette.svg";
+  const avatarImg = isAuth ? faker.image.avatar() : "/user-silhouette.svg";
 
   const onAvatarClick = (e) => {
     e.preventDefault();
