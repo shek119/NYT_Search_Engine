@@ -10,15 +10,15 @@ import { connect } from "react-redux";
 import { SEARCH_ARTICLES } from "../../redux/actions";
 import { NYTSearch } from "../../utils/utils";
 
-const SearchBar = ({ searchArticles }) => {
+const SearchBar = ({ searchArticles, className }) => {
   const [queries, setQueries] = useState("");
 
-  const onInputChange = e => {
+  const onInputChange = (e) => {
     e.persist();
     setQueries(e.target.value);
   };
 
-  const search = async event => {
+  const search = async (event) => {
     if (event.charCode && event.charCode !== 13) return;
 
     const q = queries.split(" ");
@@ -28,7 +28,7 @@ const SearchBar = ({ searchArticles }) => {
   };
 
   return (
-    <Container>
+    <Container className={className}>
       <TextInput
         type="text"
         onChange={onInputChange}
@@ -42,13 +42,10 @@ const SearchBar = ({ searchArticles }) => {
   );
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
-    searchArticles: payload => dispatch({ type: SEARCH_ARTICLES, payload })
+    searchArticles: (payload) => dispatch({ type: SEARCH_ARTICLES, payload })
   };
 };
 
-export default connect(
-  null,
-  mapDispatch
-)(SearchBar);
+export default connect(null, mapDispatch)(SearchBar);

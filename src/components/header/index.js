@@ -5,9 +5,9 @@ import {
   StyledH1,
   StyledHr,
   Avatar,
-  PageHeaderGrid
+  PageHeaderGrid,
+  StyledSearchbar
 } from "./style";
-import SearchBar from "../searchBar";
 import { useHistory } from "react-router-dom";
 
 export const SearchHeader = ({ isAuth }) => {
@@ -23,7 +23,7 @@ export const SearchHeader = ({ isAuth }) => {
     <div>
       <SearchHeaderGrid>
         <StyledH1>NYT Search</StyledH1>
-        <SearchBar />
+        <StyledSearchbar />
         <Avatar avatarImg={avatarImg} onClick={onAvatarClick} />
       </SearchHeaderGrid>
       <StyledHr />

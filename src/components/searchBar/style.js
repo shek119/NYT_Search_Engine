@@ -12,7 +12,7 @@ export const TextInput = styled.input`
 `;
 
 export const Container = styled.div`
-  margin: auto;
+  margin: auto 0;
   width: 90%;
   border: 1px solid #dfe1e5;
   border-radius: 20px;
