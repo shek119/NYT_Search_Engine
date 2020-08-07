@@ -19,13 +19,32 @@ function MainPage({ searchResults, scrollSearch, q, page }) {
   };
 
   const saveArticle = (url, { id, jwt_token }) => {
-    axios.post(`${serverURL}/${id}/article/save`, {
-      header: {
-        "x-access-token": jwt_token
-      },
-      id,
-      url
-    });
+    axios
+      .post(
+        `${serverURL}/${id}/article/save`,
+        { id, url },
+        {
+          headers: {
+            "x-access-token": jwt_token
+          }
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        // setMsg(error);
+        if (err.response) {
+          // Request made and server responded
+          console.log(err.response.data.message);
+        } else if (err.request) {
+          // The request was made but no response was received
+          console.log(err.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", err.message);
+        }
+      });
   };
 
   const mapResults = (results) => {

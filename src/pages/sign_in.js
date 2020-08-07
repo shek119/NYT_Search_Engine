@@ -22,7 +22,7 @@ const SignIn = () => {
       .then((res) => {
         const jwt_auth = {
           jwt_token: res.data.accessToke,
-          id: res.data._id
+          id: res.data.id
         };
         localStorage.setItem("jwt-auth", JSON.stringify(jwt_auth));
         history.push("/");
