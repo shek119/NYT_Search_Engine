@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Grid = styled.div`
+export const SearchHeaderGrid = styled.div`
   display: grid;
   justify-content: center;
   grid-template-columns: 90vw;
@@ -25,7 +25,7 @@ export const StyledHr = styled.hr`
 `;
 
 export const Avatar = styled.div`
-  background-image: url(${props => props.avatarImg});
+  background-image: url(${(props) => props.avatarImg});
   background-size: cover;
   width: 25px;
   height: 25px;
@@ -34,4 +34,10 @@ export const Avatar = styled.div`
   border-radius: 50%;
   border: 2px solid #dcd9d9;
   cursor: pointer;
+`;
+
+export const PageHeaderGrid = styled.div`
+  display: grid;
+  margin: 20px;
+  justify-content: space-between;
 `;

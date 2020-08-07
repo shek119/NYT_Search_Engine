@@ -18,11 +18,11 @@ function MainPage({ searchResults, scrollSearch, q, page }) {
     scrollSearch(res);
   };
 
-  const saveArticle = (url, { id, jwt_token }) => {
+  const saveArticle = (result, { id, jwt_token }) => {
     axios
       .post(
         `${serverURL}/${id}/article/save`,
-        { id, url },
+        { id, result, q },
         {
           headers: {
             "x-access-token": jwt_token
@@ -60,7 +60,7 @@ function MainPage({ searchResults, scrollSearch, q, page }) {
           author={author}
           date={date}
           saveArticle={() => {
-            saveArticle(web_url, isAuth);
+            saveArticle(result, isAuth);
           }}
         />
       );
