@@ -13,7 +13,7 @@ export const ImgDiv = styled.div`
   height: 80px;
   min-width: 80px;
   margin-right: 20px;
-  background-image: url(${props => props.src});
+  background-image: url(${(props) => props.src});
   background-position: center;
   background-size: cover;
   border-radius: 15px;
@@ -73,12 +73,17 @@ export const AnimatedDiv = styled.div`
   animation: ${bgAnimation} 2s infinite alternate;
 `;
 
-export const PlusDiv = styled.div`
+export const SvgDiv = styled.div`
   width: 1vw;
   min-width: 23px;
   align-self: center;
   margin-left: 5%;
   cursor: pointer;
+
+  & svg {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const ContentDiv = styled.div`

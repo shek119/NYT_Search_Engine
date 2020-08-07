@@ -6,11 +6,10 @@ import {
   LoadingH5,
   LoadingImgDiv,
   AnimatedDiv,
-  PlusDiv,
+  SvgDiv,
   ContentDiv
 } from "./style";
 import { StyledATag } from "../common/ATag";
-import { ReactComponent as Plus } from "../../assests/plus.svg";
 
 const ArticleCard = ({
   web_url,
@@ -19,7 +18,8 @@ const ArticleCard = ({
   author,
   date,
   popup,
-  saveArticle
+  onClick,
+  children
 }) => {
   const regex = /\d{4}-\d{2}-\d{2}/;
 
@@ -39,10 +39,7 @@ const ArticleCard = ({
         </div>
         <div>{snippet}</div>
       </ContentDiv>
-      {/* <Plus svg={"/plus.svg"} /> */}
-      <PlusDiv onClick={saveArticle}>
-        <Plus />
-      </PlusDiv>
+      <SvgDiv onClick={onClick}>{children}</SvgDiv>
     </RowContainer>
   );
 };

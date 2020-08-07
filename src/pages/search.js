@@ -9,6 +9,7 @@ import { ArticleCard, LoadingArticleCard } from "../components/card";
 import { BodyContainer } from "../components/common/Containers";
 import { NYTSearch } from "../utils/utils";
 import { SCROLL_SEARCH } from "../redux/actions";
+import { ReactComponent as Plus } from "../assests/plus.svg";
 
 function MainPage({ searchResults, scrollSearch, q, page }) {
   const isAuth = JSON.parse(localStorage.getItem("jwt-auth"));
@@ -59,10 +60,12 @@ function MainPage({ searchResults, scrollSearch, q, page }) {
           snippet={snippet}
           author={author}
           date={date}
-          saveArticle={() => {
+          onClick={() => {
             saveArticle(result, isAuth);
           }}
-        />
+        >
+          <Plus />
+        </ArticleCard>
       );
     });
   };
