@@ -8,13 +8,14 @@ export const SearchHeaderGrid = styled.div`
   grid-template-rows: 1fr 30px;
   grid-template-areas: ". header avatar" "searchbar searchbar searchbar";
   padding: 20px 0;
+  position: relative;
 
   @media screen and (min-width: 768px) {
     width: 95vw;
     grid-template-columns: 150px 1fr 30px;
     grid-template-rows: auto;
     grid-template-areas: "header searchbar avatar";
-    padding: 20px;
+    padding: 5px 20px;
     min-width: 500px;
   }
 `;
@@ -39,12 +40,17 @@ export const Avatar = styled.div`
 
 export const StyledSearchbar = styled(SearchBar)`
   grid-area: searchbar;
-  max-width: 500px;
-  justify-self: flex-start;
+  justify-self: center;
+
+  @media screen and (min-width: 768px) {
+    max-width: 500px;
+    justify-self: flex-start;
+  }
 `;
 
 export const PageHeaderGrid = styled.div`
   display: flex;
   margin: 10px 25px;
   justify-content: space-between;
+  position: relative;
 `;

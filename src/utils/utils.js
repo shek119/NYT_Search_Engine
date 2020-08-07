@@ -16,4 +16,20 @@ function onHeaderClick(history) {
   history.push("/");
 }
 
-export { NYTSearch, onHeaderClick };
+const onAvatarClick = (history, isAuth, menuRef, isOpen, setIsOpen) => {
+  // e.preventDefault();
+  if (!isAuth) history.push("/sign_in");
+  console.log(isOpen);
+  //open menu
+  if (!isOpen) {
+    menuRef.current.style.display = "block";
+    // menuRef.current.style.maxHeight = "100%";
+    setIsOpen(!isOpen);
+  } else {
+    // menuRef.current.style.maxHeight = "0%";
+    menuRef.current.style.display = "none";
+    setIsOpen(!isOpen);
+  }
+};
+
+export { NYTSearch, onHeaderClick, onAvatarClick };
