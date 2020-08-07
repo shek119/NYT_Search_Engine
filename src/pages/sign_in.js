@@ -12,22 +12,22 @@ const SignIn = () => {
   const [msg, setMsg] = useState("");
   const history = useHistory();
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     axios
       .post(`${serverURL}/auth/sign_in`, {
         username,
         password: pw
       })
-      .then(res => {
+      .then((res) => {
         const jwt_auth = {
           jwt_token: res.data.accessToke,
-          _id: res.data._id
+          id: res.data._id
         };
-        localStorage.setItem("jwt-auth", jwt_auth);
+        localStorage.setItem("jwt-auth", JSON.stringify(jwt_auth));
         history.push("/");
       })
-      .catch(err => {
+      .catch((err) => {
         // setMsg(error);
         if (err.response) {
           // Request made and server responded

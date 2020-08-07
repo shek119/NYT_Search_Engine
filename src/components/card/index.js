@@ -12,7 +12,15 @@ import {
 import { StyledATag } from "../common/ATag";
 import { ReactComponent as Plus } from "../../assests/plus.svg";
 
-const ArticleCard = ({ web_url, headline, snippet, author, date, popup }) => {
+const ArticleCard = ({
+  web_url,
+  headline,
+  snippet,
+  author,
+  date,
+  popup,
+  saveArticle
+}) => {
   const regex = /\d{4}-\d{2}-\d{2}/;
 
   return (
@@ -32,7 +40,7 @@ const ArticleCard = ({ web_url, headline, snippet, author, date, popup }) => {
         <div>{snippet}</div>
       </ContentDiv>
       {/* <Plus svg={"/plus.svg"} /> */}
-      <PlusDiv>
+      <PlusDiv onClick={saveArticle}>
         <Plus />
       </PlusDiv>
     </RowContainer>
