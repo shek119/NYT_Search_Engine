@@ -3,10 +3,14 @@ import { StyledUl, StyledLi, StyledHr } from "./style";
 import { StyledLink } from "../common/Link";
 
 const Menu = React.forwardRef((props, ref) => {
-  const { id } = JSON.parse(localStorage.getItem("jwt-auth"));
+  const isAuth = JSON.parse(localStorage.getItem("jwt-auth"));
 
   const links = [
-    { text: "View Saved Articles", link: `/${id}/saves-articles` },
+    {
+      text: "View Saved Articles",
+      link: `/${isAuth ? isAuth.id : ""}/saves-articles`
+    },
+    { text: "Main Page", link: "/" },
     { text: "Log Out", link: "/log_out" }
   ];
 

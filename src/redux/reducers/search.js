@@ -5,7 +5,6 @@ const defaultState = { page: 1, data: [], q: [] };
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case SEARCH_ARTICLES:
-      console.log(action.payload);
       return {
         ...state,
         data: action.payload.data,

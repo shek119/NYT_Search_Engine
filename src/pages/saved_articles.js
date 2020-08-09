@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { PageHeader } from "../components/header";
 import { StyledHr } from "../components/common/Hr";
@@ -7,31 +8,33 @@ import { BodyContainer } from "../components/common/Containers";
 import { ArticleCard } from "../components/card";
 import { serverURL } from "../utils/constant";
 import { ReactComponent as Minus } from "../assests/minus.svg";
+import { GET_SAVED_ATRICLES, DEL_SAVED_ARTICLE } from "../redux/actions";
 
-const SavedArticlePage = () => {
+const SavedArticlePage = ({
+  getSavedArticles,
+  delSavedArticles,
+  savedArticles
+}) => {
   const isAuth = JSON.parse(localStorage.getItem("jwt-auth"));
-  const [articles, setArticles] = useState([]);
-  const history = useHistory();
-  const location = useLocation();
 
-  const onMinusClick = (articleId, userId) => {
+  const onMinusClick = (articleId, isAuth) => {
     axios
-      .delete(`${serverURL}/${userId}/article`, {
+      .delete(`${serverURL}/${isAuth.id}/article`, {
         headers: { "x-access-token": isAuth.jwt_token },
-        params: { id: userId, articleId }
+        params: { id: isAuth.id, articleId }
       })
       .catch((err) => {
         console.log(err);
-      })
-      .then((res) => {
-        history.push(location.pathname);
       });
+    delSavedArticles(isAuth, articleId);
   };
 
   const mapArticles = () => {
-    return articles.map((article) => {
+    if (!savedArticles || savedArticles.length === 0) return;
+    return savedArticles.map((article) => {
       if (typeof article !== "object") return "";
 
+      const random = Math.random() * 10;
       const { web_url, headline, snippet, author, date, popup, _id } = article;
       return (
         <ArticleCard
@@ -41,8 +44,8 @@ const SavedArticlePage = () => {
           date={date}
           popup={popup}
           web_url={web_url}
-          key={_id}
-          onClick={() => onMinusClick(_id, isAuth.id)}
+          key={_id + String(random)}
+          onClick={() => onMinusClick(_id, isAuth)}
         >
           <Minus />
         </ArticleCard>
@@ -51,18 +54,19 @@ const SavedArticlePage = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(`${serverURL}/${isAuth.id}/articles`, {
-        headers: { "x-access-token": isAuth.jwt_token },
-        params: { id: isAuth.id }
-      })
-      .then((res) => {
-        setArticles([...res.data]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [setArticles, isAuth.id, isAuth.jwt_token]);
+    if (savedArticles.length === 0)
+      axios
+        .get(`${serverURL}/${isAuth.id}/articles`, {
+          headers: { "x-access-token": isAuth.jwt_token },
+          params: { id: isAuth.id }
+        })
+        .then((res) => {
+          getSavedArticles(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }, [isAuth, getSavedArticles, savedArticles]);
 
   return (
     <div>
@@ -73,4 +77,19 @@ const SavedArticlePage = () => {
   );
 };
 
-export default SavedArticlePage;
+const mapDispatch = (dispatch) => {
+  return {
+    getSavedArticles: (data) => {
+      dispatch({ type: GET_SAVED_ATRICLES, payload: data });
+    },
+    delSavedArticles: (isAuth, articleId) => {
+      dispatch({ type: DEL_SAVED_ARTICLE, payload: articleId });
+    }
+  };
+};
+
+const mapState = (state, ownProps) => {
+  return { savedArticles: state.user.savedArticles };
+};
+
+export default connect(mapState, mapDispatch)(SavedArticlePage);

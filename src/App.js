@@ -9,6 +9,7 @@ import SearchPage from "./pages/search";
 import SignInPage from "./pages/sign_in";
 import SignUpPage from "./pages/sign_up";
 import SavedArticlePage from "./pages/saved_articles";
+import LogOutPage from "./pages/log_out";
 
 function ProtectedRoute({ path, children }) {
   const isAuth = localStorage.getItem("jwt-auth");
@@ -33,7 +34,10 @@ function App() {
         <ProtectedRoute path="/:id/saves-articles" exact>
           <SavedArticlePage />
         </ProtectedRoute>
-        <Route path="/" exact>
+        <ProtectedRoute exact path="/log_out">
+          <LogOutPage />
+        </ProtectedRoute>
+        <Route path="/">
           <SearchPage />
         </Route>
       </Switch>
